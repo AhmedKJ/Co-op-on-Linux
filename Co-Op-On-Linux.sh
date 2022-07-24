@@ -9,7 +9,7 @@ js_CONTROLLER_1=$( ls -l /dev/input/by-id/ | grep $CONTROLLER_1 | grep js | awk 
 js_CONTROLLER_2=$( ls -l /dev/input/by-id/ | grep $CONTROLLER_2 | grep js | awk  '{ gsub("../", ""); print $11 }' )
 ### Getting game path/command
 echo "( Don't use ~ or HOME for the path )"
-read -e -p "Enter the path to the game : " GAMERUN
+read -e -p "Enter game executable path/launch command : " GAMERUN
 
 ### Writing Config files for Weston
 DIR_CO_OP="$HOME/Co-Op_On_Linux"
@@ -38,7 +38,7 @@ cp $DIR_CO_OP/weston0.ini $DIR_CO_OP/weston1.ini
 cp $DIR_CO_OP/weston0.ini $DIR_CO_OP/weston2.ini
 fi
 ### Setup resolution for Weston sessions
-printf " Enter Resolution for Weston sessions (ex:1280x720) : "
+printf " Enter Resolution for Weston sessions ( for example: 1280x720 ) : "
 read Resolution
 WIDTH=$(printf $Resolution | awk -F "x" '{print $1}')
 HEIGHT=$(printf $Resolution | awk -F "x" '{print $2}')

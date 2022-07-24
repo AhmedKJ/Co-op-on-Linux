@@ -37,13 +37,18 @@ path=/usr/bin/firefox" >> $DIR_CO_OP/weston0.ini
 cp $DIR_CO_OP/weston0.ini $DIR_CO_OP/weston1.ini
 cp $DIR_CO_OP/weston0.ini $DIR_CO_OP/weston2.ini
 fi
+### Setup resolution for Weston sessions
+printf " Enter Resolution for Weston sessions (ex:1280x720) : "
+read Resolution
+WIDTH=$(printf $Resolution | awk -F "x" '{print $1}')
+HEIGHT=$(printf $Resolution | awk -F "x" '{print $2}')
 
 ### Launching Weston sessions
 weston --xwayland -c "$DIR_CO_OP/weston0.ini" --width=1024 --height=768 2> /dev/null &
 sleep 2
-weston --xwayland -c "$DIR_CO_OP/weston1.ini" --width=$1 --height=$2 2> /dev/null &
+weston --xwayland -c "$DIR_CO_OP/weston1.ini" --width=$WIDTH --height=$HEIGHT 2> /dev/null &
 sleep 2
-weston --xwayland -c "$DIR_CO_OP/weston2.ini" --width=$1 --height=$2 2> /dev/null &
+weston --xwayland -c "$DIR_CO_OP/weston2.ini" --width=$WIDTH --height=$HEIGHT 2> /dev/null &
 sleep 2
 notneeded=$(ps l | grep weston0.ini | awk 'length($0) > 120 {print $3}')
 kill $notneeded

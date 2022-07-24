@@ -1,5 +1,5 @@
 # Co-op-on-Linux
-Scripts that allows Co-op on any game on linux
+Proof of concept Script that allows Co-op on any game on linux
 # How to use it
 
  install dependencies

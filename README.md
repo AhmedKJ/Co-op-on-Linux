@@ -20,4 +20,5 @@ $ ./Co-Op-On-Linux.sh
 
 NOTE: It Works very well with native Linux games that doesn't require Steam to launch ,
 It Should work with lutris games (i didn't test many games) , you just need to extract launch script for the game 
+
 $ lutris -b lutris:(gameid) (file name)

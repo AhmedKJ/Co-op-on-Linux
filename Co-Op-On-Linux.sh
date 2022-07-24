@@ -1,5 +1,5 @@
 #!/bin/bash
-### Manging game controllers 
+### Manage game controllers 
 CONTROLLER_LIST=$(ls -l /dev/input/by-id/ | grep joystick |  awk '{gsub("-joystick", ""); gsub("-event", ""); print $9}' | uniq)
 PS3="Choose controller for player 1 : "
 select filename in ${CONTROLLER_LIST}; do CONTROLLER_1=${filename}; break; done

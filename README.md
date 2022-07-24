@@ -3,6 +3,7 @@ Scripts for that allows Co-op on any game on linux
 # How to use it
 
 - install dependencies
+
 [Debain]
 $ apt install weston firejail
 

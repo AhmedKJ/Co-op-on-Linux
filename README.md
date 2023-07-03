@@ -20,5 +20,5 @@ run it
 
 NOTE: It Works very well with native Linux games ,
 It Should work with lutris games (i didn't test many games) , you just need to extract launch script for the game 
-
-- $ lutris -b lutris:(gameid) (file name)
+- $ lutris -l (for list games)
+- $ lutris -b (file name) lutris:(gameid)

@@ -25,7 +25,9 @@ run it :
 - $~ ./Co-Op-On-Linux.sh 
 
 After running the script for the first time, you can use --quickrun to skip the setup GUI for the resolution and controllers of each instance.
+
 However, You still need to run the script without --quickrun to reconfigure controllers.
+
 Here's quick guide on how to use --quickrun :
 
 - $~ ./Co-Op-On-linux.sh --quickrun resolution /path/to/the/game
@@ -34,8 +36,10 @@ Example :
 
 - $~ ./Co-Op-On-linux.sh --quickrun 1280x720 /home/user/game/thegame
 
-NOTE: It Works very well with native Linux games ,
-It Should work with some games running under Wine/Proton (i didn't test many games) , you just need to make launch script for the game,
+It Works very well with native Linux games ,
+It Should work with some games running under Wine/Proton (I didn't test many games) ,
+
+ you just need to make launch script for the game,
 if you are using Lutris you need to extract launch script for the game :
 
 - $ lutris -l (for listing games ids)

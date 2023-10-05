@@ -53,9 +53,11 @@ for Steam games it depends on the DRM, Some games works Some don't.
 | Terraria (Native) 
     Status: Works ✅️
     Additional Notes: on Steam client, Terraria status stuck on 'running' after exiting the game from both instance.
+
 | Borderlands 1 (Wine/Proton)
     Status: Works With minor issues ☑️
     Additional Notes: if you choose resolution lower than 1080p you going to have issues with the UI scale.
+
 | Stardew valley (Native)
     Status: Already Have in-game Co-op ✳️
     Additional Notes: Making sure you already know that if you don't 🙂️

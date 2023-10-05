@@ -48,7 +48,7 @@ then run it
 # Tested Games
 
 DRM-free games should work as long as the game doesn't prevent you form run it more than one time
-for Steam games it depends on the DRM, Some games works Some don't.
+,for Steam games it depends on the DRM, Some games works Some don't.
 
 Terraria (Native) 
 - Status: Works ✅️

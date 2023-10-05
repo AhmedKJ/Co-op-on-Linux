@@ -1,7 +1,7 @@
 # Co-op-on-Linux
 
 Script that allows Co-op on any game on linux
-Currently only supports 2 Players
+,Currently only supports 2 Players
 
 # How to use it
 

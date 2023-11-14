@@ -45,11 +45,23 @@ echo "Controllers already Configured."
 else
 rm -rf $DIR_CO_OP_CONT
 mkdir $DIR_CO_OP_CONT
-CONTROLLER_LIST=$(ls -l /dev/input/by-id/ | grep joystick |  awk '{gsub("-joystick", ""); gsub("-event", ""); print $9}' | uniq)
-CONTROLLER_1=$(zenity --list --title="Choose controller for player 1" --text="" --column=Controllers \ $CONTROLLER_LIST)
-CONTROLLER_2=$(zenity --list --title="Choose controller for player 2" --text="" --column=Controllers \ $CONTROLLER_LIST)
-echo $(ls -l /dev/input/by-id/ | grep joystick | grep -wv $CONTROLLER_1 | awk '{print "--blacklist=/dev/input/by-id/" $9;}' ) >> $DIR_CO_OP_CONT/Player1_Controller_Blacklist
-echo $(ls -l /dev/input/by-id/ | grep joystick | grep -wv $CONTROLLER_2 | awk '{print "--blacklist=/dev/input/by-id/" $9;}' ) >> $DIR_CO_OP_CONT/Player2_Controller_Blacklist 
+readarray -t CONTROLLERS < <( python get-devices.py )
+
+CONTROLLER_1=$(zenity --list --title="Choose controller for player 1" --text="" --column=Controllers --column=devices \ "${CONTROLLERS[@]}" --print-column 2 | uniq)
+CONTROLLER_2=$(zenity --list --title="Choose controller for player 2" --text="" --column=Controllers --column=devices \ "${CONTROLLERS[@]}" --print-column 2 | uniq)
+
+# add each device to blacklist
+for dev in $CONTROLLER_1
+do
+    printf -- '--blacklist=/dev/input/%s\n' $dev >> $DIR_CO_OP_CONT/Player1_Controller_Blacklist
+done
+
+# add each device to blacklist
+for dev in $CONTROLLER_2
+do
+    printf -- '--blacklist=/dev/input/%s\n' $dev >> $DIR_CO_OP_CONT/Player2_Controller_Blacklist
+done
+
 fi
 
 
@@ -71,13 +83,12 @@ mkdir $DIR_CO_OP_WEST
 printf "[core]
 xwayland=true
 idle-time=0
+shell=kiosk
 [shell]
 locking=false
 [keyboard]
 keymap_layout=gb
-[launcher]
-icon=/usr/share/weston/icon_terminal.png
-path=/usr/bin/weston-terminal" >> $DIR_CO_OP_WEST/weston0.ini
+" >> $DIR_CO_OP_WEST/weston0.ini
 cp $DIR_CO_OP_WEST/weston0.ini $DIR_CO_OP_WEST/weston1.ini
 cp $DIR_CO_OP_WEST/weston0.ini $DIR_CO_OP_WEST/weston2.ini
 fi
@@ -95,26 +106,22 @@ HEIGHT=$(printf $RESOLUTION | awk -F "x" '{print $2}')
 
 
 ### Launching Weston sessions
-
-weston --xwayland -c "$DIR_CO_OP_WEST/weston0.ini" --width=1024 --height=768 2> /dev/null & 
-sleep 2
 weston --xwayland -c "$DIR_CO_OP_WEST/weston1.ini" --width=$WIDTH --height=$HEIGHT 2> /dev/null &
-sleep 2
 weston --xwayland -c "$DIR_CO_OP_WEST/weston2.ini" --width=$WIDTH --height=$HEIGHT 2> /dev/null &
-sleep 2
-notneeded=$(ps l | grep weston0.ini | awk 'length($0) > 120 {print $3}')
-kill $notneeded
+#notneeded=$(ps l | grep weston0.ini | awk 'length($0) > 120 {print $3}')
+#kill $notneeded
 sleep 1
 
 
 ### Launching instances
 
 #---Player 1---#
-DISPLAY=:2 WAYLAND_DISPLAY=wayland-1 firejail --noprofile $(cat $DIR_CO_OP_CONT/Player1_Controller_Blacklist ) "$GAMERUN" &
-sleep 1
+#sleep 5
+DISPLAY=:2 WAYLAND_DISPLAY=wayland-1 firejail --noprofile $(cat $DIR_CO_OP_CONT/Player2_Controller_Blacklist ) "$GAMERUN" &
+#sleep 1
 #---Player 2---#
-DISPLAY=:3 WAYLAND_DISPLAY=wayland-2 firejail --noprofile $(cat $DIR_CO_OP_CONT/Player2_Controller_Blacklist ) "$GAMERUN" &
-sleep 1
+DISPLAY=:3 WAYLAND_DISPLAY=wayland-2 firejail --noprofile $(cat $DIR_CO_OP_CONT/Player1_Controller_Blacklist ) "$GAMERUN" &
+#sleep 1
 
 
 echo "Done~!"

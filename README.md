@@ -1,7 +1,8 @@
 # Co-op-on-Linux
 
 Script that allows Co-op on any game on linux
-,Currently only supports 2 Players
+
+Currently only supports 2 Players
 
 # How to use it
 
@@ -51,12 +52,12 @@ then run it
 
 # Tested Games
 
-DRM-free games should work as long as the game doesn't prevent you form run it more than one time
-,for Steam games it depends on the DRM, Some games works Some don't.
+DRM-free games should work as long as the game doesn't prevent you from running it more than once.
+For Steam games it depends on the DRM, Some games work, some don't.
 
 Terraria (Native) 
 - Status: Works ✅️
-- Additional Notes: on Steam client, Terraria status stuck on 'running' after exiting the game from both instance.
+- Additional Notes: on Steam client, Terraria status is stuck on 'running' after exiting the game from both instances.
 
 Borderlands 1 (Wine/Proton)
 - Status: Works With minor issues ☑️
